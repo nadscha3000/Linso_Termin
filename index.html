@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wann kommt Linso? 🌿</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF8F4;
+    --sage: #8BAF8B;
+    --sage-light: #C8DCC8;
+    --sage-pale: #EDF4ED;
+    --green-dark: #2D4A2D;
+    --gold: #C4955A;
+    --rose: #F2D5C4;
+    --text: #2D3A2D;
+    --text-muted: #6B7B6B;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 16px 60px;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 56px 20px 40px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.15;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  .parents-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--rose);
+    color: var(--green-dark);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  /* FORM */
+  .form-card {
+    max-width: 680px;
+    margin: 8px auto 32px;
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    box-shadow: 0 2px 24px rgba(45,74,45,0.07);
+  }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--green-dark);
+    margin-bottom: 24px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #E0E8E0;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input:focus, textarea:focus {
+    border-color: var(--sage);
+    background: white;
+  }
+
+  textarea { resize: vertical; min-height: 72px; }
+
+  .date-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+  }
+
+  /* CALENDAR */
+  .calendar-section {
+    margin-top: 24px;
+  }
+
+  .calendar-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .month-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  .weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    margin-bottom: 4px;
+  }
+
+  .weekday {
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 0;
+  }
+
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: clamp(0.65rem, 2vw, 0.8rem);
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1.5px solid transparent;
+    user-select: none;
+    position: relative;
+    background: var(--sage-pale);
+    color: var(--text);
+  }
+
+  .cal-day:hover {
+    background: var(--sage-light);
+    border-color: var(--sage);
+  }
+
+  .cal-day.selected {
+    background: var(--green-dark);
+    color: white;
+    border-color: var(--green-dark);
+    font-weight: 600;
+  }
+
+  .cal-day.taken {
+    background: var(--rose);
+    border-color: #E8B8A0;
+    font-weight: 500;
+  }
+
+  .cal-day.taken.selected {
+    background: var(--green-dark);
+    color: white;
+    border-color: var(--green-dark);
+  }
+
+  .cal-day.empty {
+    background: transparent;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .cal-day.past {
+    opacity: 0.4;
+  }
+
+  /* dot indicator for taken days */
+  .cal-day .dot {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* SUBMIT */
+  .submit-btn {
+    width: 100%;
+    margin-top: 22px;
+    padding: 15px;
+    background: var(--green-dark);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .submit-btn:hover { background: #3d6b3d; }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { background: var(--sage-light); color: var(--text-muted); cursor: not-allowed; }
+
+  /* GUESSES LIST */
+  .guesses-section {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .guesses-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--green-dark);
+    margin-bottom: 6px;
+  }
+
+  .guesses-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 22px;
+  }
+
+  .guess-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 10px rgba(45,74,45,0.05);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .guess-date-badge {
+    flex-shrink: 0;
+    width: 52px;
+    height: 60px;
+    background: var(--sage-pale);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--sage-light);
+  }
+
+  .badge-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    line-height: 1;
+  }
+
+  .badge-month {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-top: 2px;
+  }
+
+  .guess-info { flex: 1; min-width: 0; }
+
+  .guess-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--green-dark);
+  }
+
+  .guess-time {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .guess-note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-style: italic;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .guess-weight {
+    flex-shrink: 0;
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--green-dark);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    z-index: 1000;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* CONFETTI */
+  .confetti-piece {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: confettiFall var(--dur) ease-in forwards;
+  }
+
+  @keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg) scale(0.4); opacity: 0; }
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 680px;
+    margin: 36px auto 32px;
+    border: none;
+    border-top: 1px solid #E0E8E0;
+  }
+
+  /* WEIGHT/TIME row */
+  .form-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 520px) {
+    .form-row-3 { grid-template-columns: 1fr 1fr; }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+  }
+
+  .empty-state .leaf { font-size: 2.5rem; margin-bottom: 12px; }
+  .empty-state p { font-size: 0.88rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Ein kleines Wunder ist unterwegs</p>
+  <h1>Wann kommt <em>Linso</em>?</h1>
+  <p class="hero-sub">Stell deine Vermutung ein, und wir schauen wer am nächsten dran ist.</p>
+  <div class="parents-tag">🌿 Nadja &amp; Frido erwarten euch</div>
+</header>
+
+<!-- FORM -->
+<div class="form-card">
+  <p class="form-title">Dein Tipp</p>
+
+  <div class="form-row">
+    <div>
+      <label>Dein Name</label>
+      <input type="text" id="guesserName" placeholder="z. B. Oma Elsbeth" maxlength="40">
+    </div>
+    <div>
+      <label>Uhrzeit der Geburt</label>
+      <input type="time" id="guessTime">
+    </div>
+  </div>
+
+  <div class="form-row-3">
+    <div>
+      <label>Gewicht (g)</label>
+      <input type="text" id="guessWeight" placeholder="z. B. 3400" maxlength="6">
+    </div>
+    <div>
+      <label>Grösse (cm)</label>
+      <input type="text" id="guessSize" placeholder="z. B. 52" maxlength="4">
+    </div>
+    <div>
+      <label>Geschlecht?</label>
+      <select id="guessGender" style="width:100%;padding:11px 14px;border:1.5px solid #E0E8E0;border-radius:10px;font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--text);background:var(--cream);outline:none;">
+        <option value="">—</option>
+        <option value="Mädchen 👧">Mädchen 👧</option>
+        <option value="Bub 👦">Bub 👦</option>
+        <option value="Überraschung 🎁">Überraschung 🎁</option>
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label>Nachricht ans Geburtstagskind (optional)</label>
+    <textarea id="guessNote" placeholder="Ein Wunsch oder eine kleine Botschaft für Linso…"></textarea>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="calendar-section">
+    <p class="calendar-label">Wähle das Datum</p>
+    <div id="calJuli"></div>
+    <div id="calAugust"></div>
+    <p class="date-hint" id="selectedDateText">Noch kein Datum gewählt — klick auf einen Tag!</p>
+  </div>
+
+  <button class="submit-btn" id="submitBtn" onclick="submitGuess()">Tipp abschicken 🌿</button>
+</div>
+
+<hr class="divider">
+
+<!-- GUESSES LIST -->
+<section class="guesses-section">
+  <p class="guesses-title">Alle Tipps</p>
+  <p class="guesses-subtitle" id="guessCount">Noch keine Tipps — sei die erste Person!</p>
+  <div id="guessList"></div>
+</section>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── JSONBin Konfiguration ─────────────────────────────────────────
+// 1. Konto auf jsonbin.io erstellen
+// 2. API Key unter Account → API Keys kopieren
+// 3. Einmal einen Bin erstellen (siehe README) → Bin-ID hierher kopieren
+const JSONBIN_API_KEY = '$2a$10$Z6TbGF4zPM2KbO20FTBw4uHYv40rdo5UsnIVjCV1thtl5ac971a.6';
+const JSONBIN_BIN_ID  = '6a4198dfda38895dfe0d3313';
+const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+
+async function loadGuesses() {
+  try {
+    const r = await fetch(JSONBIN_URL + '/latest', {
+      headers: { 'X-Master-Key': JSONBIN_API_KEY }
+    });
+    if (!r.ok) return [];
+    const data = await r.json();
+    return Array.isArray(data.record?.guesses) ? data.record.guesses : [];
+  } catch { return []; }
+}
+
+async function saveGuesses(guesses) {
+  try {
+    await fetch(JSONBIN_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': JSONBIN_API_KEY
+      },
+      body: JSON.stringify({ guesses })
+    });
+  } catch(e) { console.error(e); }
+}
+
+// ── State ────────────────────────────────────────────────────────
+let selectedDate = null; // 'YYYY-MM-DD'
+let allGuesses = [];
+const TODAY = new Date();
+TODAY.setHours(0,0,0,0);
+
+const MONTHS = [
+  { year: 2026, month: 6, name: 'Juli 2026', start: 1, end: 31 },
+  { year: 2026, month: 7, name: 'August 2026', start: 1, end: 31 },
+];
+const DE_MONTHS = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+const DE_WEEKDAYS = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+
+// ── Calendar ─────────────────────────────────────────────────────
+function buildCalendar(year, month, name, containerId) {
+  const container = document.getElementById(containerId);
+  const taken = new Set(allGuesses.map(g => g.date));
+
+  container.innerHTML = `<p class="month-title">${name}</p>`;
+
+  const wdRow = document.createElement('div');
+  wdRow.className = 'weekdays';
+  DE_WEEKDAYS.forEach(d => {
+    const s = document.createElement('div');
+    s.className = 'weekday';
+    s.textContent = d;
+    wdRow.appendChild(s);
+  });
+  container.appendChild(wdRow);
+
+  const grid = document.createElement('div');
+  grid.className = 'cal-grid';
+
+  const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+  const leadBlanks = (firstDay === 0 ? 6 : firstDay - 1);
+  for (let i = 0; i < leadBlanks; i++) {
+    const b = document.createElement('div');
+    b.className = 'cal-day empty';
+    grid.appendChild(b);
+  }
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const cell = document.createElement('div');
+    cell.className = 'cal-day';
+    cell.textContent = d;
+    cell.dataset.date = dateStr;
+
+    const cellDate = new Date(year, month, d);
+    if (cellDate < TODAY) cell.classList.add('past');
+    if (taken.has(dateStr)) {
+      cell.classList.add('taken');
+      const dot = document.createElement('span');
+      dot.className = 'dot';
+      cell.appendChild(dot);
+    }
+    if (dateStr === selectedDate) cell.classList.add('selected');
+
+    cell.addEventListener('click', () => selectDate(dateStr, cell));
+    grid.appendChild(cell);
+  }
+
+  container.appendChild(grid);
+}
+
+function selectDate(dateStr, el) {
+  document.querySelectorAll('.cal-day.selected').forEach(c => c.classList.remove('selected'));
+  selectedDate = dateStr;
+  el.classList.add('selected');
+  const [y,m,d] = dateStr.split('-');
+  document.getElementById('selectedDateText').textContent =
+    `Gewählt: ${parseInt(d)}. ${DE_MONTHS[parseInt(m)-1]} ${y}`;
+}
+
+function rebuildCalendars() {
+  buildCalendar(2026, 6, 'Juli 2026', 'calJuli');
+  buildCalendar(2026, 7, 'August 2026', 'calAugust');
+}
+
+// ── Submit ───────────────────────────────────────────────────────
+async function submitGuess() {
+  const name = document.getElementById('guesserName').value.trim();
+  const time = document.getElementById('guessTime').value;
+  const weight = document.getElementById('guessWeight').value.trim();
+  const size = document.getElementById('guessSize').value.trim();
+  const gender = document.getElementById('guessGender').value;
+  const note = document.getElementById('guessNote').value.trim();
+
+  if (!name) { showToast('Bitte gib deinen Namen ein 🙏'); return; }
+  if (!selectedDate) { showToast('Bitte wähle ein Datum im Kalender 📅'); return; }
+
+  // Check duplicate name
+  const dupName = allGuesses.find(g => g.name.toLowerCase() === name.toLowerCase());
+  if (dupName) { showToast(`${name} hat schon einen Tipp abgegeben!`); return; }
+
+  const guess = {
+    id: Date.now(),
+    name, date: selectedDate, time, weight, size, gender, note,
+    submittedAt: new Date().toISOString()
+  };
+
+  allGuesses.push(guess);
+  await saveGuesses(allGuesses);
+
+  // Reset form
+  document.getElementById('guesserName').value = '';
+  document.getElementById('guessTime').value = '';
+  document.getElementById('guessWeight').value = '';
+  document.getElementById('guessSize').value = '';
+  document.getElementById('guessGender').value = '';
+  document.getElementById('guessNote').value = '';
+  selectedDate = null;
+  document.getElementById('selectedDateText').textContent = 'Noch kein Datum gewählt — klick auf einen Tag!';
+
+  rebuildCalendars();
+  renderGuesses();
+  showToast(`Danke, ${guess.name}! Dein Tipp ist gespeichert 🌿`);
+  launchConfetti();
+}
+
+// ── Render guesses ───────────────────────────────────────────────
+function renderGuesses() {
+  const list = document.getElementById('guessList');
+  const countEl = document.getElementById('guessCount');
+
+  if (allGuesses.length === 0) {
+    countEl.textContent = 'Noch keine Tipps — sei die erste Person!';
+    list.innerHTML = `<div class="empty-state"><div class="leaf">🌱</div><p>Die Tipps erscheinen hier,<br>sobald die ersten Vermutungen eingehen.</p></div>`;
+    return;
+  }
+
+  const sorted = [...allGuesses].sort((a,b) => a.date.localeCompare(b.date));
+  countEl.textContent = `${allGuesses.length} ${allGuesses.length === 1 ? 'Tipp' : 'Tipps'} bisher`;
+
+  list.innerHTML = sorted.map(g => {
+    const [y,m,d] = g.date.split('-');
+    const extras = [
+      g.time ? `⏰ ${g.time} Uhr` : null,
+      g.weight ? `⚖️ ${g.weight} g` : null,
+      g.size ? `📏 ${g.size} cm` : null,
+      g.gender ? g.gender : null,
+    ].filter(Boolean).join(' · ');
+
+    return `
+    <div class="guess-card">
+      <div class="guess-date-badge">
+        <span class="badge-day">${parseInt(d)}</span>
+        <span class="badge-month">${DE_MONTHS[parseInt(m)-1]}</span>
+      </div>
+      <div class="guess-info">
+        <div class="guess-name">${escHtml(g.name)}</div>
+        ${extras ? `<div class="guess-time">${escHtml(extras)}</div>` : ''}
+        ${g.note ? `<div class="guess-note">"${escHtml(g.note)}"</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Toast ────────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// ── Confetti ─────────────────────────────────────────────────────
+function launchConfetti() {
+  const colors = ['#8BAF8B','#C4955A','#F2D5C4','#2D4A2D','#C8DCC8','#FAD6A5'];
+  for (let i = 0; i < 60; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.cssText = `
+        left: ${Math.random()*100}vw;
+        top: -10px;
+        background: ${colors[Math.floor(Math.random()*colors.length)]};
+        border-radius: ${Math.random()>0.5?'50%':'2px'};
+        --dur: ${0.9+Math.random()*1.4}s;
+        width: ${6+Math.random()*6}px;
+        height: ${6+Math.random()*6}px;
+        transform: rotate(${Math.random()*360}deg);
+      `;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 2500);
+    }, Math.random()*400);
+  }
+}
+
+// ── Init ─────────────────────────────────────────────────────────
+async function init() {
+  allGuesses = await loadGuesses();
+  rebuildCalendars();
+  renderGuesses();
+}
+
+init();
+</script>
+</body>
+</html>
