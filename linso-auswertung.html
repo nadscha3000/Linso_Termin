@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neo Ryan ist da! 🎉 Auswertung</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #FAF8F4;
+  --sage: #8BAF8B;
+  --sage-light: #C8DCC8;
+  --sage-pale: #EDF4ED;
+  --green-dark: #2D4A2D;
+  --gold: #C4955A;
+  --gold-light: #F5E8D4;
+  --rose: #F2D5C4;
+  --text: #2D3A2D;
+  --text-muted: #6B7B6B;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 0 16px 80px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 7vw, 4rem);
+  color: var(--green-dark);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-vitals {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.vital {
+  background: white;
+  border: 1.5px solid var(--sage-light);
+  border-radius: 12px;
+  padding: 12px 20px;
+  text-align: center;
+}
+.vital-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  line-height: 1;
+}
+.vital-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* WINNER PODIUM */
+.podium-section {
+  max-width: 720px;
+  margin: 8px auto 0;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--green-dark);
+  margin-bottom: 6px;
+}
+.section-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.podium-place {
+  flex: 1;
+  max-width: 200px;
+  text-align: center;
+}
+.podium-card {
+  border-radius: 14px 14px 0 0;
+  padding: 16px 12px 12px;
+  position: relative;
+}
+.p1 .podium-card { background: var(--gold); min-height: 130px; }
+.p2 .podium-card { background: var(--sage); min-height: 100px; }
+.p3 .podium-card { background: var(--sage-light); min-height: 80px; }
+.podium-medal { font-size: 1.8rem; margin-bottom: 6px; }
+.podium-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: white;
+  margin-bottom: 3px;
+}
+.p3 .podium-name { color: var(--green-dark); }
+.podium-score {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.8);
+}
+.p3 .podium-score { color: var(--text-muted); }
+.podium-base {
+  background: var(--green-dark);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 0 0 10px 10px;
+}
+.p2 .podium-base, .p3 .podium-base { font-size: 0.85rem; }
+
+/* CATEGORY CARDS */
+.categories {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+@media (max-width: 560px) { .categories { grid-template-columns: 1fr; } }
+
+.cat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 16px rgba(45,74,45,0.06);
+}
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.cat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.cat-icon.gold { background: var(--gold-light); }
+.cat-icon.sage { background: var(--sage-pale); }
+.cat-icon.rose { background: #FCF0EB; }
+.cat-icon.blue { background: #EBF3FC; }
+.cat-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--green-dark);
+}
+.cat-actual {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.cat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid #F0F4EF;
+}
+.cat-row:last-child { border-bottom: none; }
+.cat-rank {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.rank-1 { background: var(--gold); color: white; }
+.rank-2 { background: var(--sage); color: white; }
+.rank-3 { background: var(--sage-light); color: var(--green-dark); }
+.rank-other { background: #F0F4EF; color: var(--text-muted); }
+.cat-name { flex: 1; font-size: 0.85rem; font-weight: 500; }
+.cat-val { font-size: 0.8rem; color: var(--text-muted); text-align: right; }
+.cat-diff { font-size: 0.72rem; color: var(--sage); font-weight: 500; }
+
+/* OVERALL TABLE */
+.overall-section {
+  max-width: 720px;
+  margin: 0 auto 30px;
+}
+.overall-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(45,74,45,0.06);
+}
+.overall-table th {
+  background: var(--green-dark);
+  color: white;
+  padding: 10px 14px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+}
+.overall-table td {
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #F0F4EF;
+}
+.overall-table tr:last-child td { border-bottom: none; }
+.overall-table tr:nth-child(even) td { background: #FAFCFA; }
+.medal-cell { font-size: 1.1rem; }
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* GENDER */
+.gender-section {
+  max-width: 720px;
+  margin: 0 auto 30px;
+  background: white;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 2px 16px rgba(45,74,45,0.06);
+}
+.gender-bar {
+  display: flex;
+  height: 28px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 14px 0 10px;
+}
+.gender-correct { background: var(--sage); }
+.gender-wrong { background: var(--rose); }
+.gender-labels { display: flex; gap: 16px; flex-wrap: wrap; }
+.gender-label { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-muted); }
+.gender-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* DIVIDER */
+hr.div { border: none; border-top: 1px solid #E0E8E0; max-width: 720px; margin: 30px auto; }
+
+/* confetti */
+.confetti-piece {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  animation: fall var(--dur) ease-in forwards;
+  border-radius: 2px;
+}
+@keyframes fall {
+  0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.bee {
+  position: fixed;
+  font-size: 1.4rem;
+  pointer-events: none;
+  z-index: 0;
+  animation: beeFly var(--bee-dur) ease-in-out infinite alternate;
+  opacity: 0.35;
+}
+@keyframes beeFly {
+  0%   { transform: translateX(0) translateY(0) rotate(-5deg); }
+  50%  { transform: translateX(var(--bee-dx)) translateY(-18px) rotate(5deg); }
+  100% { transform: translateX(var(--bee-dx2)) translateY(8px) rotate(-8deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- BEES -->
+<div class="bee" style="top:8%;left:5%;--bee-dur:4.1s;--bee-dx:22px;--bee-dx2:-10px">🐝</div>
+<div class="bee" style="top:22%;right:4%;--bee-dur:5.3s;--bee-dx:-18px;--bee-dx2:12px">🐝</div>
+<div class="bee" style="top:55%;left:2%;--bee-dur:6.2s;--bee-dx:15px;--bee-dx2:-8px">🐝</div>
+<div class="bee" style="top:72%;right:3%;--bee-dur:4.7s;--bee-dx:-20px;--bee-dx2:10px">🐝</div>
+<div class="bee" style="top:40%;left:92%;--bee-dur:5.8s;--bee-dx:12px;--bee-dx2:-15px">🐝</div>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">🐝 Neo Ryan Hummel · 23. Juli 2026 · Das Tippspiel-Ergebnis</p>
+  <h1>Neo Ryan ist <em>da!</em> 🌿</h1>
+  <p style="color:var(--text-muted);font-size:0.9rem;margin-top:12px;font-style:italic">32 Tipps — und das sind die Gewinner 🐝</p>
+  <div class="hero-vitals">
+    <div class="vital"><div class="vital-val">23.07.</div><div class="vital-label">Geburtstag</div></div>
+    <div class="vital"><div class="vital-val">19:44</div><div class="vital-label">Uhrzeit</div></div>
+    <div class="vital"><div class="vital-val">2870 g</div><div class="vital-label">Gewicht</div></div>
+    <div class="vital"><div class="vital-val">46 cm</div><div class="vital-label">Grösse</div></div>
+    <div class="vital"><div class="vital-val">👦</div><div class="vital-label">Bub</div></div>
+  </div>
+</header>
+
+<!-- CATEGORIES -->
+<section class="overall-section">
+  <p class="section-title">🎯 Kategorien-Gewinner</p>
+  <p class="section-sub">Wer lag in jeder einzelnen Kategorie am nächsten?</p>
+</section>
+
+<div class="categories">
+
+  <!-- DATUM -->
+  <div class="cat-card">
+    <div class="cat-header">
+      <div class="cat-icon gold">📅</div>
+      <div>
+        <div class="cat-title">Datum</div>
+        <div class="cat-actual">Tatsache: 23. Juli 2026</div>
+      </div>
+    </div>
+    <div class="cat-row"><span class="cat-rank rank-1">1</span><span class="cat-name">Onkel Adi I.</span><span class="cat-val">26. Juli<br><span class="cat-diff">3 Tage daneben</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-2">2</span><span class="cat-name">Gino</span><span class="cat-val">30. Juli<br><span class="cat-diff">7 Tage</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-2">2</span><span class="cat-name">Rita Sunnehalb</span><span class="cat-val">30. Juli<br><span class="cat-diff">7 Tage</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-3">4</span><span class="cat-name">Jolanda</span><span class="cat-val">31. Juli<br><span class="cat-diff">8 Tage</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-other">5</span><span class="cat-name">Mitch</span><span class="cat-val">1. Aug<br><span class="cat-diff">9 Tage</span></span></div>
+  </div>
+
+  <!-- UHRZEIT -->
+  <div class="cat-card">
+    <div class="cat-header">
+      <div class="cat-icon sage">⏰</div>
+      <div>
+        <div class="cat-title">Uhrzeit</div>
+        <div class="cat-actual">Tatsache: 19:44 Uhr</div>
+      </div>
+    </div>
+    <div class="cat-row"><span class="cat-rank rank-1">1</span><span class="cat-name">Sabi Ventrone</span><span class="cat-val">19:32<br><span class="cat-diff">12 Min daneben</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-2">2</span><span class="cat-name">Götti Charlie</span><span class="cat-val">19:21<br><span class="cat-diff">23 Min</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-3">3</span><span class="cat-name">Mario</span><span class="cat-val">19:05<br><span class="cat-diff">39 Min</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-other">4</span><span class="cat-name">Neo Ryan (Test)</span><span class="cat-val">20:25<br><span class="cat-diff">41 Min</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-other">5</span><span class="cat-name">Leon</span><span class="cat-val">20:30<br><span class="cat-diff">46 Min</span></span></div>
+  </div>
+
+  <!-- GEWICHT -->
+  <div class="cat-card">
+    <div class="cat-header">
+      <div class="cat-icon rose">⚖️</div>
+      <div>
+        <div class="cat-title">Gewicht</div>
+        <div class="cat-actual">Tatsache: 2870 g</div>
+      </div>
+    </div>
+    <div class="cat-row"><span class="cat-rank rank-1">1</span><span class="cat-name">urgrossi Erika</span><span class="cat-val">2850 g<br><span class="cat-diff">nur 20 g daneben!</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-2">2</span><span class="cat-name">Matteo</span><span class="cat-val">2800 g<br><span class="cat-diff">70 g</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-3">3</span><span class="cat-name">Kirschbsum</span><span class="cat-val">3100 g<br><span class="cat-diff">230 g</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-other">4</span><span class="cat-name">Isabel</span><span class="cat-val">3167 g<br><span class="cat-diff">297 g</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-other">5</span><span class="cat-name">Markus</span><span class="cat-val">2550 g<br><span class="cat-diff">320 g</span></span></div>
+  </div>
+
+  <!-- GRÖSSE -->
+  <div class="cat-card">
+    <div class="cat-header">
+      <div class="cat-icon blue">📏</div>
+      <div>
+        <div class="cat-title">Grösse</div>
+        <div class="cat-actual">Tatsache: 46 cm</div>
+      </div>
+    </div>
+    <div class="cat-row"><span class="cat-rank rank-1">1</span><span class="cat-name">Markus</span><span class="cat-val">48 cm<br><span class="cat-diff">2 cm daneben</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-1">1</span><span class="cat-name">Jeannine</span><span class="cat-val">48 cm<br><span class="cat-diff">2 cm</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-1">1</span><span class="cat-name">Silvan</span><span class="cat-val">48 cm<br><span class="cat-diff">2 cm</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-1">1</span><span class="cat-name">Leon</span><span class="cat-val">48 cm<br><span class="cat-diff">2 cm</span></span></div>
+    <div class="cat-row"><span class="cat-rank rank-other">5</span><span class="cat-name">Isabel, Rita, Sabine…</span><span class="cat-val">49 cm<br><span class="cat-diff">3 cm</span></span></div>
+  </div>
+
+</div>
+
+
+
+<p style="text-align:center;margin-top:30px;font-family:'Playfair Display',serif;font-style:italic;color:var(--text-muted)">
+  🐝 Herzlich willkommen, Neo Ryan Hummel 🐝<br>
+  <span style="font-size:0.8rem">Nadja & Frido, Juli 2026</span>
+</p>
+
+<script>
+// Launch confetti on load
+window.addEventListener('load', () => {
+  const colors = ['#8BAF8B','#C4955A','#F2D5C4','#2D4A2D','#C8DCC8','#FAD6A5'];
+  for (let i = 0; i < 80; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.cssText = `left:${Math.random()*100}vw;top:-10px;background:${colors[Math.floor(Math.random()*colors.length)]};--dur:${1.2+Math.random()*2}s;width:${5+Math.random()*8}px;height:${5+Math.random()*8}px;border-radius:${Math.random()>0.5?'50%':'3px'};transform:rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }, Math.random() * 800);
+  }
+});
+</script>
+</body>
+</html>
